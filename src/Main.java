@@ -9,6 +9,7 @@ public class Main {
 
             Scanner userInput = new Scanner(System.in);
 
+            // Menu of the pomodoro console
             System.out.println("Welcome to you Pomodoro App! Ready to get some work done?");
             System.out.println("1. It's focus time!!");
             System.out.println("2. Mmmh, maybe later...");
@@ -19,12 +20,14 @@ public class Main {
             userInput.nextLine();
 
             switch(x) {
-                case 1 -> {
-                    //Choisir le temps de chaque sous -session
+                case 1 -> { // We start Pomodoro Sessions
+                    // Choosing number of sessions 
                     System.out.println("How many sessions do you want to do ? =^_^= ");
                     int nbSession = userInput.nextInt();
                     userInput.nextLine();
 
+
+                    // Choosing number of minutes for each sessions (Work, ShortBreak, LongBreak)
                     System.out.println("How many minutes for the Work session ?");
                     int worksession = userInput.nextInt();
                     userInput.nextLine();
@@ -39,7 +42,7 @@ public class Main {
                     
                     
                     
-                    // Commencement de la Session Pomodoro
+                    // Beginning of the Pomodoro Sessions
                     // System.out.println("Type 'p' to pause, 'r' to resume, 's' to skip the session, 'q' to exit.");
                     System.out.println("Starting a Pomodoro session... =^.^=");
 
@@ -53,14 +56,20 @@ public class Main {
                     int i = 1;
                     while (i <= nbSession) {
                         System.out.println("Session " + (i) + " started! Lock in!!");
+
+                        // Work Session
                         Session session = new Session(Session.SessionType.Work, worksession);
                         Timer timer = new Timer(session, worksession);
                         timer.start();
 
+
+                        // Conditions for a consistent Pomodoro Session
+
+                            // If we have one session (Work) then no need for a break after
                         if (i == nbSession) {
                             System.out.println("All sessions are done !!");
                             
-
+                            // For two consecutive sessions we have a short break
                         } else if (i % 3 != 0) {
                             System.out.println("Break time! It's important to clear your head =^.^=");
                             // System.out.println("Type 'p' to pause, 'r' to resume, 's' to skip the session, 'q' to exit.");
@@ -68,6 +77,8 @@ public class Main {
                             Timer breakTimer = new Timer(breakSession, shortBsession);
                             breakTimer.start();
 
+
+                            // After two full sessions (Work + ShortBreak), we have a Work + LongBreak session
                         } else {
                             System.out.println("Watch some videos, play some games, talk to your friends and come back stronger! =^.^=");
                             // System.out.println("Type 'p' to pause, 'r' to resume, 's' to skip the session, 'q' to exit.");
@@ -82,7 +93,7 @@ public class Main {
                     System.out.println("Amazing Work! See you next time <3");
                 }
 
-                case 2 -> {
+                case 2 -> { // Leaving the pomodro console
                     System.out.println("You got this! See you soon! <3");
                     System.exit(0);
                 }
